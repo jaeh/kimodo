@@ -89,6 +89,10 @@ npm link
 # Basic API request
 kimodo -k YOUR_API_KEY -p "A person walks forward"
 
+# Or set RUNPOD_API_KEY in a .env file (no -k flag needed)
+echo "RUNPOD_API_KEY=your_key_here" > .env
+kimodo -p "A person walks forward"
+
 # With custom endpoint and body
 kimodo -u https://api.runpod.ai/v2/your-endpoint/run \
        -k YOUR_API_KEY \
@@ -103,15 +107,15 @@ kimodo --help
 
 **CLI Options:**
 
-| Flag                | Alias | Description                          |
-| ------------------- | ----- | ------------------------------------ |
-| `--url`             | `-u`  | API endpoint URL                     |
-| `--method`          | `-m`  | HTTP method (default: POST)          |
-| `--prompt`          | `-p`  | Prompt text for request body         |
-| `--api-key`         | `-k`  | API key for authorization            |
-| `--header`          | `-H`  | Custom headers ("Key: Value")        |
-| `--body`            | `-b`  | Raw request body as JSON string      |
-| `--json`            | `-j`  | Parse and pretty-print response JSON |
+| Flag        | Alias | Description                          |
+| ----------- | ----- | ------------------------------------ |
+| `--url`     | `-u`  | API endpoint URL                     |
+| `--method`  | `-m`  | HTTP method (default: POST)          |
+| `--prompt`  | `-p`  | Prompt text for request body         |
+| `--api-key` | `-k`  | API key for authorization            |
+| `--header`  | `-H`  | Custom headers ("Key: Value")        |
+| `--body`    | `-b`  | Raw request body as JSON string      |
+| `--json`    | `-j`  | Parse and pretty-print response JSON |
 
 ## 📦 Available Models
 

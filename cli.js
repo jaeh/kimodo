@@ -1,14 +1,26 @@
 #!/usr/bin/env node
 
 import { cli } from '@magic/cli'
+import { readFileSync, existsSync } from 'fs'
+import { resolve } from 'path'
+
+// Read token from .env if it exists
+function getEnvToken() {
+  const envPath = resolve('.env')
+  if (existsSync(envPath)) {
+    const content = readFileSync(envPath, 'utf8')
+    const match = content.match(/RUNPOD_API_KEY\s*=\s*(\S+)/)
+    if (match) {
+      return match[1]
+    }
+  }
+  return null
+}
 
 const argv = cli({
   name: 'kimodo-cli',
   text: 'CLI tool for RunPod API requests',
-  commands: [
-    ['request', 'req'],
-    ['status'],
-  ],
+  commands: [['request', 'req'], ['status']],
   options: [
     ['--url', '-u'],
     ['--method', '-m'],
@@ -48,8 +60,10 @@ const headers = {
   'Content-Type': 'application/json',
 }
 
-if (argv.args.apiKey) {
-  headers['Authorization'] = `Bearer ${argv.args.apiKey}`
+const apiKey = argv.args.apiKey || getEnvToken()
+
+if (apiKey) {
+  headers['Authorization'] = `Bearer ${apiKey}`
 }
 
 if (argv.args.header) {
@@ -112,7 +126,7 @@ async function checkStatus() {
   try {
     const response = await fetch(statusUrl, {
       headers: {
-        'Authorization': `Bearer ${argv.args.apiKey}`,
+        Authorization: `Bearer ${apiKey}`,
       },
     })
 
