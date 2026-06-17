@@ -16,6 +16,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git curl ca-certificates \
     gosu \
     cmake build-essential ninja-build
+    
+RUN rm -f /usr/local/bin/cmake && ln -s /usr/bin/cmake /usr/local/bin/cmake
 
 # Clone Kimodo repo
 RUN git clone https://github.com/nv-tlabs/kimodo.git /workspace/kimodo && \
