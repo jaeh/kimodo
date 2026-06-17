@@ -69,7 +69,8 @@ fi
 
 exec gosu "${HOST_UID}:${HOST_GID}" "$@"
 EOF
-chmod +x /usr/local/bin/docker-entrypoint
+
+RUN chmod +x /usr/local/bin/docker-entrypoint
 
 # Environment
 ENV HF_TOKEN=""
