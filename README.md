@@ -58,9 +58,11 @@ After deployment:
 - **Interactive**: Generate motions via web interface
 - **Constraints**: Add spatial/temporal constraints in the UI
 
-## 💻 CLI Usage
+## 💻 Server CLI
 
 SSH into your pod and run:
+
+### Kimodo Server Commands
 
 ```bash
 # Basic motion generation
@@ -75,6 +77,41 @@ TEXT_ENCODER_DEVICE=cpu kimodo_gen "A person runs." --model Kimodo-SOMA-RP-v1
 # List available models
 kimodo_gen --help
 ```
+
+### RunPod API CLI
+
+After deploying, you can also interact with the RunPod API directly using the Node.js CLI:
+
+```bash
+# Install globally (or use npm link in project)
+npm link
+
+# Basic API request
+kimodo -k YOUR_API_KEY -p "A person walks forward"
+
+# With custom endpoint and body
+kimodo -u https://api.runpod.ai/v2/your-endpoint/run \
+       -k YOUR_API_KEY \
+       -b '{"input":{"prompt":"A person waves"}}'
+
+# Check job status
+kimodo status -k YOUR_API_KEY -u https://api.runpod.ai/v2/your-endpoint/status/JOB_ID
+
+# Show help
+kimodo --help
+```
+
+**CLI Options:**
+
+| Flag                | Alias | Description                          |
+| ------------------- | ----- | ------------------------------------ |
+| `--url`             | `-u`  | API endpoint URL                     |
+| `--method`          | `-m`  | HTTP method (default: POST)          |
+| `--prompt`          | `-p`  | Prompt text for request body         |
+| `--api-key`         | `-k`  | API key for authorization            |
+| `--header`          | `-H`  | Custom headers ("Key: Value")        |
+| `--body`            | `-b`  | Raw request body as JSON string      |
+| `--json`            | `-j`  | Parse and pretty-print response JSON |
 
 ## 📦 Available Models
 
