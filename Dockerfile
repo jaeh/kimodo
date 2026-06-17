@@ -22,6 +22,12 @@ RUN git clone https://github.com/nv-tlabs/kimodo.git /workspace/kimodo && \
     cd /workspace/kimodo && \
     git submodule update --init --recursive
 
+# Install RunPod serverless SDK
+RUN python -m pip install runpod
+
+# Copy serverless handler (for queue-based endpoints)
+COPY handler.py /workspace/kimodo/handler.py
+
 WORKDIR /workspace/kimodo
 
 # Clone kimodo-viser fork

@@ -1,4 +1,4 @@
-# RunPod Configuration for Kimodo
+# RunPod Serverless Endpoint Configuration for Kimodo
 # NVIDIA's Human Motion Generation Model
 
 name = "kimodo-motion-gen"
@@ -6,17 +6,10 @@ vidia_driver = "535"
 
 # Minimum 17GB VRAM for full GPU mode
 # With TEXT_ENCODER_DEVICE=cpu, works on cards with <16GB
-# Recommended: NVIDIA RTX 3090, RTX 4090, or NVIDIA A100
 gpu = "NVIDIA-RTX-4090-24GB"
 
 # Python 3.10 environment
 python_version = "3.10"
-
-# Container startup
-# This runs the Gradio interactive demo
-container_start_command = '''
-bash /workspace/start.sh
-'''
 
 # Environment variables
 env = [
@@ -31,18 +24,20 @@ env = [
         default = "cuda" 
     },
     { 
-        name = "SERVER_PORT", 
-        description = "Demo server port", 
-        default = "7860" 
+        name = "KIMODO_MODEL", 
+        description = "Model: Kimodo-SOMA-RP-v1, Kimodo-G1-RP-v1, Kimodo-SOMA-Seed-v1, Kimodo-G1-Seed-v1", 
+        default = "Kimodo-SOMA-RP-v1" 
     },
 ]
 
-# Port forwards
-port_forward = [7860]
+# Handler file for serverless endpoint
+handler = "handler.py"
+
+# Timeout settings
+timeout = 300
 
 # Health check
 health_check_file = "/workspace/.health_check"
 
 # Persistent storage for HuggingFace cache
-# Uncomment and adjust if you want persistent model cache:
 # volume_mounts = { "/path/to/hf-cache" = "/workspace/.cache/huggingface" }
