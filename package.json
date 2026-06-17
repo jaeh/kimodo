@@ -1,6 +1,6 @@
 {
   "name": "kimodo",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "[NVIDIA's Kimodo](https://research.nvidia.com/labs/sil/projects/kimodo/): Fast Text-to-Motion Generation from text descriptions.",
   "main": "request.js",
   "bin": {
