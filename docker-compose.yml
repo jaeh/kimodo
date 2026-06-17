@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  # Text encoder service (Llama 3) - runs in background
+  text-encoder:
+    build: .
+    image: kimodo:1.0
+    container_name: kimodo-text-encoder
+    ports:
+      - "9550:9550"
+    environment:
+      - HF_TOKEN=${HF_TOKEN}
+    volumes:
+      - ~/.cache/huggingface:/workspace/.cache/huggingface
+    shm_size: 16gb
+    ipc: host
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9550/"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+    restart: unless-stopped
+    command: python -m kimodo.scripts.run_text_encoder_server
+
+  # Interactive demo
+  demo:
+    build: .
+    image: kimodo:1.0
+    container_name: kimodo-demo
+    ports:
+      - "7860:7860"
+    environment:
+      - HF_TOKEN=${HF_TOKEN}
+      - TEXT_ENCODER_URL=http://text-encoder:9550/
+      - SERVER_PORT=7860
+    volumes:
+      - ~/.cache/huggingface:/workspace/.cache/huggingface
+    shm_size: 16gb
+    ipc: host
+    depends_on:
+      text-encoder:
+        condition: service_healthy
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: unless-stopped
+    command: python -m kimodo.demo
