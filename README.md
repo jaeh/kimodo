@@ -11,10 +11,10 @@
 
 ### 2. Hardware Requirements
 
-| VRAM | Mode | Notes |
-|------|------|-------|
-| ≥17GB | Full GPU | Fast inference (~10-30s per motion) |
-| <16GB | CPU text encoder | Slower but works |
+| VRAM  | Mode             | Notes                               |
+| ----- | ---------------- | ----------------------------------- |
+| ≥17GB | Full GPU         | Fast inference (~10-30s per motion) |
+| <16GB | CPU text encoder | Slower but works                    |
 
 **Recommended GPUs**: RTX 3090, RTX 4090, A100
 
@@ -23,6 +23,7 @@
 ### Option A: Custom Container (Recommended)
 
 1. **Build the Docker image** locally first:
+
    ```bash
    docker build -t kimodo .
    ```
@@ -41,17 +42,18 @@ Search for "Kimodo" in RunPod community templates.
 
 ## 📁 Files Included
 
-| File | Purpose |
-|------|---------|
-| `Dockerfile` | Container image definition |
-| `runpod.toml` | RunPod deployment config |
-| `start.sh` | Auto-install & startup script |
-| `docker-compose.yml` | Local multi-service setup |
-| `.env.example` | Environment template |
+| File                 | Purpose                       |
+| -------------------- | ----------------------------- |
+| `Dockerfile`         | Container image definition    |
+| `runpod.toml`        | RunPod deployment config      |
+| `start.sh`           | Auto-install & startup script |
+| `docker-compose.yml` | Local multi-service setup     |
+| `.env.example`       | Environment template          |
 
 ## 🖥️ Accessing the Demo
 
 After deployment:
+
 - **Demo UI**: `http://<your-server-ip>:7860`
 - **Interactive**: Generate motions via web interface
 - **Constraints**: Add spatial/temporal constraints in the UI
@@ -76,24 +78,27 @@ kimodo_gen --help
 
 ## 📦 Available Models
 
-| Model | Dataset | Skeleton | Quality |
-|-------|---------|----------|---------|
-| `Kimodo-SOMA-RP-v1` | Full Bones Rigplay (700hr) | SOMA | ⭐⭐⭐ Best |
-| `Kimodo-G1-RP-v1` | Full Bones Rigplay (700hr) | G1 | ⭐⭐⭐ Best |
-| `Kimodo-SOMA-Seed-v1` | BONES-SEED (288hr) | SOMA | ⭐⭐ Good |
-| `Kimodo-G1-Seed-v1` | BONES-SEED (288hr) | G1 | ⭐⭐ Good |
+| Model                 | Dataset                    | Skeleton | Quality     |
+| --------------------- | -------------------------- | -------- | ----------- |
+| `Kimodo-SOMA-RP-v1`   | Full Bones Rigplay (700hr) | SOMA     | ⭐⭐⭐ Best |
+| `Kimodo-G1-RP-v1`     | Full Bones Rigplay (700hr) | G1       | ⭐⭐⭐ Best |
+| `Kimodo-SOMA-Seed-v1` | BONES-SEED (288hr)         | SOMA     | ⭐⭐ Good   |
+| `Kimodo-G1-Seed-v1`   | BONES-SEED (288hr)         | G1       | ⭐⭐ Good   |
 
 ## 🔧 Troubleshooting
 
 ### "Model not found" errors
+
 - Ensure `HF_TOKEN` is set and valid
 - First run downloads models (~5-10GB)
 
 ### Out of Memory (OOM)
+
 - Set `TEXT_ENCODER_DEVICE=cpu`
 - Reduce generation duration
 
 ### Slow inference
+
 - Normal on first run (model loading)
 - Use GPU mode for best performance
 
@@ -113,7 +118,7 @@ motion = model.generate(
 
 # Save in various formats
 motion.save("output.bvh")  # BVH
-motion.save("output.fbx")  # FBX  
+motion.save("output.fbx")  # FBX
 motion.save("output.npz") # NumPy
 motion.save("output.glb")  # GLB/GLTF
 ```

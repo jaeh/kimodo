@@ -2,8 +2,9 @@
   "name": "kimodo",
   "version": "0.0.1",
   "description": "[NVIDIA's Kimodo](https://research.nvidia.com/labs/sil/projects/kimodo/): Fast Text-to-Motion Generation from text descriptions.",
-  "main": "index.js",
+  "main": "request.js",
   "scripts": {
+    "format": "f -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/jaeh/kimodo/issues"
   },
-  "homepage": "https://github.com/jaeh/kimodo#readme"
+  "homepage": "https://github.com/jaeh/kimodo#readme",
+  "devDependencies": {
+    "@magic/format": "0.0.74"
+  }
 }
