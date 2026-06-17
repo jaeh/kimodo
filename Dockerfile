@@ -15,10 +15,7 @@ WORKDIR /workspace
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git curl ca-certificates \
     gosu \
-    && rm -rf /var/lib/apt/lists/*
-
-# Remove broken cmake shim (shadows system cmake, breaks MotionCorrection C++ build)
-RUN rm -f /usr/local/bin/cmake || true
+    cmake build-essential ninja-build
 
 # Clone Kimodo repo
 RUN git clone https://github.com/nv-tlabs/kimodo.git /workspace/kimodo && \
