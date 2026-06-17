@@ -1,0 +1,21 @@
+{
+  "name": "kimodo",
+  "version": "0.0.1-alpha.0",
+  "description": "[NVIDIA's Kimodo](https://research.nvidia.com/labs/sil/projects/kimodo/): Fast Text-to-Motion Generation from text descriptions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaeh/kimodo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/jaeh/kimodo/issues"
+  },
+  "homepage": "https://github.com/jaeh/kimodo#readme"
+}
